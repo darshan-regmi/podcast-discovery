@@ -1,4 +1,7 @@
+'use client'
+
 import type { Episode } from '@/lib/types'
+import RatingStars from './RatingStars'
 
 function formatDuration(seconds: number): string {
   const h = Math.floor(seconds / 3600)
@@ -20,14 +23,17 @@ export default function EpisodeCard({ episode }: { episode: Episode }) {
         </span>
       </div>
       <p className="text-sm text-gray-600 line-clamp-2">{episode.description}</p>
-      <a
-        href={episode.audioUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-blue-600 text-sm font-medium"
-      >
-        Play
-      </a>
+      <div className="flex justify-between items-center mt-2">
+        <a
+          href={episode.audioUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 text-sm font-medium"
+        >
+          Play
+        </a>
+        <RatingStars episodeId={episode.id} />
+      </div>
     </div>
   )
 }
