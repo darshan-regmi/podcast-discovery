@@ -101,9 +101,10 @@ Done when: the app feels usable day to day, not just correct in a demo.
 
 ## Phase 9: Ship it
 
-- [ ] Push to GitHub (repo initialized locally, no remote yet)
+- [x] Push to GitHub, private repo at `darshan-regmi/podcast-discovery`, branch `main` tracking `origin/main`
 - [ ] Deploy to Vercel
-- [ ] Set up a scheduled job, Vercel cron or a Cloudflare Worker (README section 4), to hit `/api/sync-feeds` automatically instead of relying on manual triggers
+      _Heads up: Vercel's free Hobby plan will not deploy from a private repo. Either flip this repo to public first, or deploy with a Pro plan._
+- [x] Set up a scheduled job, `vercel.json` has a daily cron against `/api/sync-feeds`. It is written but inert until the app is deployed, Vercel reads the schedule at deploy time
 
 Done when: the live URL shows fresh episodes without touching localhost.
 
