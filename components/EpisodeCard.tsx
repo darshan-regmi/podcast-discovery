@@ -2,6 +2,7 @@
 
 import type { Episode } from '@/lib/types'
 import RatingStars from './RatingStars'
+import { toggleSaved, useIsSaved } from '@/lib/saved'
 
 function formatDuration(seconds: number): string {
   const h = Math.floor(seconds / 3600)
@@ -11,6 +12,12 @@ function formatDuration(seconds: number): string {
 }
 
 export default function EpisodeCard({ episode }: { episode: Episode }) {
+  const saved = useIsSaved(episode.id)
+
+  function handleSave() {
+    toggleSaved(episode.id)
+  }
+
   return (
     <div className="border rounded-lg p-4 flex flex-col gap-2">
       <div className="flex justify-between items-start gap-2">
@@ -22,7 +29,9 @@ export default function EpisodeCard({ episode }: { episode: Episode }) {
           {formatDuration(episode.durationSeconds)}
         </span>
       </div>
+
       <p className="text-sm text-gray-600 line-clamp-2">{episode.description}</p>
+
       <div className="flex justify-between items-center mt-2">
         <a
           href={episode.audioUrl}
@@ -32,7 +41,12 @@ export default function EpisodeCard({ episode }: { episode: Episode }) {
         >
           Play
         </a>
-        <RatingStars episodeId={episode.id} />
+        <div className="flex items-center gap-3">
+          <RatingStars episodeId={episode.id} />
+          <button type="button" onClick={handleSave} aria-label="Save episode" className="text-sm">
+            {saved ? '★ Saved' : '☆ Save'}
+          </button>
+        </div>
       </div>
     </div>
   )

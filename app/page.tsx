@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
+import Link from 'next/link'
 import Fuse from 'fuse.js'
 import EpisodeCard from '@/components/EpisodeCard'
 import SearchBar from '@/components/SearchBar'
@@ -50,7 +51,10 @@ export default function Home() {
     <main className="max-w-3xl mx-auto p-6">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold">Podcast Discovery</h1>
-        <div className="flex gap-2 text-sm">
+        <div className="flex gap-4 items-center text-sm">
+          <Link href="/saved" className="text-gray-500">
+            Saved
+          </Link>
           <button
             type="button"
             onClick={() => setView('latest')}
