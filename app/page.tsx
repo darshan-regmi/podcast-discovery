@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Fuse from 'fuse.js'
 import EpisodeCard from '@/components/EpisodeCard'
 import SearchBar from '@/components/SearchBar'
+import TagFilter from '@/components/TagFilter'
 import type { Episode } from '@/lib/types'
 import { useRatings } from '@/lib/ratings'
 import { rankEpisodes } from '@/lib/similarity'
@@ -14,6 +15,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [query, setQuery] = useState('')
+  const [activeTag, setActiveTag] = useState<string | null>(null)
   const [view, setView] = useState<'latest' | 'forYou'>('latest')
 
   useEffect(() => {
@@ -29,6 +31,11 @@ export default function Home() {
       })
   }, [])
 
+  const allTags = useMemo(
+    () => Array.from(new Set(episodes.flatMap(ep => ep.tags))).sort(),
+    [episodes]
+  )
+
   const fuse = useMemo(
     () => new Fuse(episodes, { keys: ['title', 'description'], threshold: 0.4 }),
     [episodes]
@@ -42,7 +49,8 @@ export default function Home() {
     return scored.length > 0 ? scored : episodes
   }, [view, episodes, ratings])
 
-  const filtered = query ? fuse.search(query).map(r => r.item) : ranked
+  const searched = query ? fuse.search(query).map(r => r.item) : ranked
+  const filtered = activeTag ? searched.filter(ep => ep.tags.includes(activeTag)) : searched
 
   if (loading) return <main className="max-w-3xl mx-auto p-6">Loading episodes...</main>
   if (error) return <main className="max-w-3xl mx-auto p-6 text-red-600">{error}</main>
@@ -73,6 +81,7 @@ export default function Home() {
       </div>
 
       <SearchBar value={query} onChange={setQuery} />
+      <TagFilter tags={allTags} active={activeTag} onSelect={setActiveTag} />
 
       <div className="mt-6 space-y-4">
         {filtered.length === 0 && (
