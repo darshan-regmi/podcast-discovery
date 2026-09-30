@@ -1,0 +1,14 @@
+[
+  {
+    "id": "up-first",
+    "title": "Up First from NPR",
+    "rssUrl": "https://feeds.npr.org/510318/podcast.xml",
+    "tags": ["news"]
+  },
+  {
+    "id": "vergecast",
+    "title": "The Vergecast",
+    "rssUrl": "https://feeds.megaphone.fm/vergecast",
+    "tags": ["tech"]
+  }
+]
