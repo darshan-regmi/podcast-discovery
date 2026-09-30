@@ -59,17 +59,17 @@ Done when: the app opens to real episodes from your real feeds, and clicking pla
 
 ## Phase 4: Search
 
-- [ ] `pnpm add fuse.js`
-- [ ] Build `SearchBar.tsx`
-- [ ] Wire Fuse.js to search across title and description, filtering the episode list client side as the user types
+- [x] `pnpm add fuse.js`
+- [x] Build `SearchBar.tsx`
+- [x] Wire Fuse.js to search across title and description, filtering the episode list client side as the user types
 
 Done when: typing a keyword narrows the list to matching episodes, including near matches for typos.
 
 ## Phase 5: Ratings, stored locally
 
-- [ ] Build `RatingStars.tsx`, a 1 to 5 click interface
-- [ ] On rating, write to localStorage keyed by episode ID (`Rating` shape from README section 7)
-- [ ] Show the current rating on `EpisodeCard` if one already exists
+- [x] Build `RatingStars.tsx`, a 1 to 5 click interface
+- [x] On rating, write to localStorage keyed by episode ID (`Rating` shape from README section 7)
+- [x] Show the current rating on `EpisodeCard` if one already exists
 
 Done when: rating an episode, refreshing the page, and the rating is still there.
 
@@ -77,31 +77,31 @@ Done when: rating an episode, refreshing the page, and the rating is still there
 
 Start this only once there are at least 5 to 10 real ratings sitting in localStorage. Testing a recommender against zero data does not tell you it is broken, it just tells you nothing.
 
-- [ ] Build `lib/similarity.ts` with `cosineSimilarity` and a `buildTasteProfile` function (README section 5.3 has the full math and the function)
-- [ ] Call it directly from the home page, not from an API route: ratings live in localStorage, which only exists in the browser, so a server-side route has nothing to read. Ranking is just a function call in the component.
-- [ ] On the home page, add a toggle or a second section: "For you" sorted by score, "Latest" sorted by date
+- [x] Build `lib/similarity.ts` with `cosineSimilarity` and a `buildTasteProfile` function (README section 5.3 has the full math and the function)
+- [x] Call it directly from the home page, not from an API route: ratings live in localStorage, which only exists in the browser, so a server-side route has nothing to read. Ranking is just a function call in the component.
+- [x] On the home page, add a toggle or a second section: "For you" sorted by score, "Latest" sorted by date
 
 Done when: an episode sharing tags with your highly rated episodes visibly ranks above one that does not.
 
 ## Phase 7: Saving episodes
 
-- [ ] Add a bookmark button to `EpisodeCard`
-- [ ] Store saved episode IDs in localStorage
-- [ ] Build `app/saved/page.tsx` to list them
+- [x] Add a bookmark button to `EpisodeCard`
+- [x] Store saved episode IDs in localStorage
+- [x] Build `app/saved/page.tsx` to list them
 
 Done when: an episode saved from the home page shows up again on `/saved`.
 
 ## Phase 8: Tag filtering and polish
 
-- [ ] Build `TagFilter.tsx`, a row of toggleable tag chips above the episode list
-- [ ] Add loading and empty states: no episodes yet, no search results, no ratings yet for recommendations
-- [ ] Pass over spacing, typography, and mobile layout now that the functionality is proven
+- [x] Build `TagFilter.tsx`, a row of toggleable tag chips above the episode list
+- [x] Add loading and empty states: no episodes yet, no search results, no ratings yet for recommendations
+- [x] Pass over spacing, typography, and mobile layout now that the functionality is proven
 
 Done when: the app feels usable day to day, not just correct in a demo.
 
 ## Phase 9: Ship it
 
-- [ ] Push to GitHub
+- [ ] Push to GitHub (repo initialized locally, no remote yet)
 - [ ] Deploy to Vercel
 - [ ] Set up a scheduled job, Vercel cron or a Cloudflare Worker (README section 4), to hit `/api/sync-feeds` automatically instead of relying on manual triggers
 
