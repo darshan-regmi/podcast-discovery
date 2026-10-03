@@ -1,7 +1,9 @@
 import Parser from 'rss-parser'
 import type { Episode } from './types'
 
-const parser = new Parser()
+// A full minute (the default) can stall a server-render or build; 10s is
+// plenty for a feed and lets a dead host fail fast.
+const parser = new Parser({ timeout: 10_000 })
 
 function parseDuration(raw: string | undefined): number {
   if (!raw) return 0

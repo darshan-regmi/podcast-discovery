@@ -263,7 +263,9 @@ Then:
 
 ## 10. Environment variables
 
-None required. If you later add the optional `CRON_SECRET` lock from the tutorial, remember that it also locks out your own home page, which fetches the same route.
+`NEXT_PUBLIC_SITE_URL` is optional and only affects SEO output (canonical URLs, Open Graph, `robots.txt`, `sitemap.xml`). Set it to the production origin, e.g. `https://podcasts.example.com`. If unset it falls back to `VERCEL_PROJECT_PRODUCTION_URL`, then `VERCEL_URL`, then `http://localhost:3000`.
+
+If you later add the optional `CRON_SECRET` lock from the tutorial, remember that it also locks out your own home page, which fetches the same route.
 
 ## 11. Running locally
 
@@ -271,7 +273,7 @@ None required. If you later add the optional `CRON_SECRET` lock from the tutoria
 pnpm dev
 ```
 
-Visit `http://localhost:3000`. Episodes load on their own, the home page calls `/api/sync-feeds` for you. Each visit re-parses every feed from the network, so the first load takes a few seconds. `pnpm lint`, `pnpm typecheck`, and `pnpm build` are the checks worth running before you ship.
+Visit `http://localhost:3000`. The home page is server-rendered (cached for an hour) with the newest 60 episodes, then the browser calls `/api/sync-feeds` to load the full archive for search and recommendations. Each full sync re-parses every feed from the network, so it takes a few seconds. `pnpm lint`, `pnpm typecheck`, and `pnpm build` are the checks worth running before you ship.
 
 ## 12. Roadmap
 
